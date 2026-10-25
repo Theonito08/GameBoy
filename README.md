@@ -1,4 +1,4 @@
-NOT FINISHED PROJECT (Debug mode does nothing as of right now)
+## NOT FINISHED PROJECT (Debug mode does nothing as of right now)
 
 GameBoy Emulator (C#)
 
