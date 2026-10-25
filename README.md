@@ -7,10 +7,10 @@ I made this for my computer science NEA project.
 
 Features:
 
-- **CPU:**, fully functioning and accurate.
-- **Graphics:**, PPU rendering using GTK, accurate enough to run games.
-- **Audio:**, 4-Channel Audio, with basic timing but its good enough
-- **Controls:**, D pad = WASD, A button = Z, B button = X, START = C, SELECT = V
+- **CPU:** fully functioning and accurate.
+- **Graphics:** PPU rendering using GTK, accurate enough to run games.
+- **Audio:** 4-Channel Audio, with basic timing but its good enough
+- **Controls:** D pad = WASD, A button = Z, B button = X, START = C, SELECT = V
 
 Cartridge types supported:
 Although all cartridge types are recognised, since different cartridge types work differently, this emulator cannot support them all.
