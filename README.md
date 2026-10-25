@@ -16,7 +16,7 @@ Cartridge types supported:
 Although all cartridge types are recognised, since different cartridge types work differently, this emulator cannot support them all.
 Currently it supports No MBC, MBC1, MBC5 (with all their variants).
 
- 🛠️ How to Run
+How to Run
 
 1. Clone this repository:
    ```bash
