@@ -61,11 +61,6 @@ namespace GameBoyEmu.Cartrige
             {
                 romName.Append("noname");
             }
-            Logger.Write(romName.ToString());
-            Logger.Write($"Cart type: {cartridgeType}");
-            Logger.Write($"ROM size:  {rom[0x0148]:X2}");
-            Logger.Write($"ROM banks: {romBankCount}");
-
         }
         public byte ReadByte(ushort address)
         {

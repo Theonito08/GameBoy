@@ -1350,24 +1350,9 @@ namespace GameBoyEmu.Processor
                     _Registers.SP = _Registers.HL;
                     return 8;
 
-
-                //DEBUG
                 default:
-                    Logger.LogEnable = true;
-                    Logger.Write($"Unknown opcode: {opCode:X2} at PC:{(_Registers.PC - 1):X4}");
-                    Logger.Write(
-                    $"A:{_Registers.A:X2} F:{_Registers.F:X2} " +
-                    $"B:{_Registers.B:X2} C:{_Registers.C:X2} " +
-                    $"D:{_Registers.D:X2} E:{_Registers.E:X2} " +
-                    $"H:{_Registers.H:X2} L:{_Registers.L:X2} " +
-                    $"SP:{_Registers.SP:X4}"
-                    );
-                    Logger.LogEnable = false;
                     return 0;
             }
-
-
-
         }
         public int ExecuteCBInstruction(byte opCode)
         {
@@ -2296,17 +2281,6 @@ namespace GameBoyEmu.Processor
                         return 12;
                     }
                 default:
-                    Logger.LogEnable = true;
-                    Logger.Write("CB COMMAND");
-                    Logger.Write($"Unknown opcode: {opCode:X2} at PC:{(_Registers.PC - 1):X4}");
-                    Logger.Write(
-                        $"A:{_Registers.A:X2} F:{_Registers.F:X2} " +
-                        $"B:{_Registers.B:X2} C:{_Registers.C:X2} " +
-                        $"D:{_Registers.D:X2} E:{_Registers.E:X2} " +
-                        $"H:{_Registers.H:X2} L:{_Registers.L:X2} " +
-                        $"SP:{_Registers.SP:X4}"
-                    );
-                    Logger.LogEnable = false;
                     return 0;
             }
         }

@@ -26,7 +26,6 @@ namespace GameBoyEmu.Main
         MenuItem loadRomItem = new MenuItem("Load ROM");
         MenuItem emulatorMenuItem = new MenuItem("Emulator");
         MenuItem debuggerMenuItem = new MenuItem("Debugger");
-        MenuItem logFileItem = new MenuItem("Check Log File");
         MenuItem SaveStateItem = new MenuItem("Save State");
         MenuItem LoadStateItem = new MenuItem("Load State");
         CheckMenuItem debugModeItem = new CheckMenuItem("Enable Debug Mode");
@@ -66,7 +65,6 @@ namespace GameBoyEmu.Main
         {
             SetDefaultSize(WIDTH * SCALE + 40, HEIGHT * SCALE + 80);
             DeleteEvent += WindowDelete;
-            Logger.InitLogWriter();
             BuildEmu();
             BuildUI();
             GLib.Timeout.Add(1, EmulatorLoop);
@@ -75,7 +73,6 @@ namespace GameBoyEmu.Main
 
         private void WindowDelete(object sender, DeleteEventArgs e)
         {
-            Logger.TerminateLogging();
             Application.Quit();
         }
 
@@ -123,14 +120,7 @@ namespace GameBoyEmu.Main
             emulatorMenu.Append(pauseItem);
             emulatorMenuItem.Submenu = emulatorMenu;
 
-            debugModeItem.Active = Logger.LogEnable;
-            debugModeItem.Toggled += delegate
-            {
-                Logger.LogEnable = debugModeItem.Active;
-            };
-            logFileItem.Activated += OpenLogFile;
             debuggerMenu.Append(debugModeItem);
-            debuggerMenu.Append(logFileItem);
             debuggerMenuItem.Submenu = debuggerMenu;
 
             openDebugger.Activated += OpenDebugger;
@@ -256,8 +246,6 @@ namespace GameBoyEmu.Main
             cartrige = new Cartridge();
             cartrige.LoadROMFile(path);
             memory.MountCartrige(cartrige);
-            Logger.Write($"ROM LOADED : {path}");
-            Logger.Write($"MBC : {memory.ReadByteFromAddress(0x0147): X2}");
             paused = false;
             pauseItem.Active = false;
             display.widget.GrabFocus();
@@ -297,7 +285,6 @@ namespace GameBoyEmu.Main
                 int used = cpu.Cycle();
                 if (used == 0)
                 {
-                    Logger.Write("CPU stopped because of unknown opcode or error.");
                     paused = true;
                     break;
                 }
@@ -307,26 +294,10 @@ namespace GameBoyEmu.Main
             return true;
         }
 
-        private void OpenLogFile(object sender, EventArgs e)
-        {
-            Logger.LogWriter?.Flush();
-            if (File.Exists(Logger.filePath))
-            {
-                Process.Start(new ProcessStartInfo { FileName = Logger.filePath, UseShellExecute = true });
-            }
-            else
-            {
-                MessageDialog dialog = new MessageDialog(this, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "No log file to show!");
-                dialog.Run();
-                dialog.Destroy();
-            }
-        }
-
         private void OnKeyDown(object sender, KeyPressEventArgs pressArgs)
         {
             bool keyHandled = true;
             bool alreadyPressed = false;
-            Logger.Write($"KEY DOWN: {pressArgs.Event.Key}");
             switch (pressArgs.Event.Key)
             {
                 case Gdk.Key.w:

@@ -136,7 +136,6 @@
     <Compile Include="Graphics\GameBoyFrameBuffer.cs" />
     <Compile Include="Graphics\PPURenderer.cs" />
     <Compile Include="Main\SaveState.cs" />
-    <Compile Include="Debugger\Logs.cs" />
     <Compile Include="Input\IO.cs" />
     <Compile Include="Processor\OpcodeNames.cs" />
     <Compile Include="Processor\OpcodeQueue.cs" />
