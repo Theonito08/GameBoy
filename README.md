@@ -1,4 +1,3 @@
-## NOT FINISHED PROJECT
 
 GameBoy Emulator (C#)
 
